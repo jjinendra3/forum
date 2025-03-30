@@ -41,6 +41,7 @@ import {
   SheetTitle,
   SheetDescription,
   SheetFooter,
+  SheetClose,
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -76,6 +77,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import SplashScreen from "./SpashScreen";
+import Squares from "@/components/sqaures";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 // Mock data for categories with colors
 const categories = [
@@ -165,7 +168,7 @@ const initialThreads = [
     commentsList: [
       {
         id: 1,
-        author: "Morgan Williams",
+        author: "Morgan Wills",
         authorImage: "/placeholder.svg?height=40&width=40",
         content:
           "Focus on what you're passionate about rather than your job title. People connect better with enthusiasm than credentials.",
@@ -173,7 +176,7 @@ const initialThreads = [
       },
       {
         id: 2,
-        author: "Avery Thompson",
+        author: "Avery Son",
         authorImage: "/placeholder.svg?height=40&width=40",
         content:
           "Ask questions! People love talking about themselves and their work. It takes the pressure off you and helps build connections.",
@@ -308,7 +311,7 @@ const initialThreads = [
   {
     id: 8,
     title: "Networking strategies for remote developers",
-    author: "Morgan Williams",
+    author: "Morgan Wills",
     authorImage: "/placeholder.svg?height=40&width=40",
     timestamp: "5 days ago",
     category: "career",
@@ -339,7 +342,7 @@ const initialThreads = [
   {
     id: 9,
     title: "Thoughts on the new Apple Vision Pro?",
-    author: "Avery Thompson",
+    author: "Avery Son",
     authorImage: "/placeholder.svg?height=40&width=40",
     timestamp: "6 days ago",
     category: "technology",
@@ -382,7 +385,7 @@ const initialThreads = [
     commentsList: [
       {
         id: 1,
-        author: "Morgan Williams",
+        author: "Morgan Wills",
         authorImage: "/placeholder.svg?height=40&width=40",
         content:
           "Just wrapped up a major project and taking some time to learn about WebGPU. Anyone else exploring this?",
@@ -390,7 +393,7 @@ const initialThreads = [
       },
       {
         id: 2,
-        author: "Avery Thompson",
+        author: "Avery Son",
         authorImage: "/placeholder.svg?height=40&width=40",
         content:
           "Struggling with burnout lately. Would appreciate any tips on maintaining work-life balance in tech.",
@@ -689,7 +692,7 @@ export default function Home() {
                 />
               </div>
 
-              <TooltipProvider>
+              {/* <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -699,20 +702,20 @@ export default function Home() {
                         theme === "dark"
                           ? "text-gray-400 hover:text-white"
                           : "text-gray-500 hover:text-gray-900",
-                        "md:flex hidden items-center justify-center"
+                        "md:flex hidden items-center justify-center h-12 w-12 px-1 py-1"
                       )}
                       onClick={() => setShowSavedPanel(!showSavedPanel)}
                     >
-                      <Bookmark className="h-7 w-7" />
+                      <Bookmark className="h-12 w-12" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom">
                     <p>Saved Threads</p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              </TooltipProvider> */}
 
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <SunMedium
                   className={cn(
                     "h-4 w-4",
@@ -736,7 +739,7 @@ export default function Home() {
                     theme === "dark" ? "text-blue-400" : "text-gray-400"
                   )}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </header>
@@ -775,7 +778,7 @@ export default function Home() {
                       theme === "dark"
                         ? "data-[state=active]:bg-[#2D3748] data-[state=active]:text-white"
                         : "data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700",
-                      "md:text-sm text-xs md:px-3 px-2"
+                      "md:text-sm text-xs px-1 md:px-2"
                     )}
                   >
                     All
@@ -788,7 +791,7 @@ export default function Home() {
                         theme === "dark"
                           ? "data-[state=active]:bg-[#2D3748] data-[state=active]:text-white"
                           : "data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700",
-                        "md:text-sm text-xs md:px-3 px-2"
+                        "text-xs md:text-sm px-1 md:px-2 "
                       )}
                     >
                       {category.name}
@@ -796,177 +799,6 @@ export default function Home() {
                   ))}
                 </TabsList>
               </Tabs>
-
-              <div className="flex md:items-start items-center justify-center gap-2">
-                <Dialog
-                  open={showAddThreadModal}
-                  onOpenChange={setShowAddThreadModal}
-                >
-                  <DialogTrigger asChild>
-                    <Button
-                      size={"sm"}
-                      className={cn(
-                        "gap-1",
-                        theme === "dark"
-                          ? "bg-blue-600 hover:bg-blue-700"
-                          : "bg-blue-500 hover:bg-blue-600",
-                        "flex items-center justify-center font-semibold text-gray-300"
-                      )}
-                    >
-                      <span className="text-sm md:text-md">+</span>
-                      <span className="text-xs md:text-sm"> New Thread</span>
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent
-                    className={
-                      theme === "dark"
-                        ? "bg-[#1E293B] border-[#2D3748]"
-                        : "bg-white"
-                    }
-                  >
-                    <DialogHeader>
-                      <DialogTitle
-                        className={
-                          theme === "dark" ? "text-white" : "text-gray-900"
-                        }
-                      >
-                        Create New Thread
-                      </DialogTitle>
-                      <DialogDescription
-                        className={
-                          theme === "dark" ? "text-gray-400" : "text-gray-500"
-                        }
-                      >
-                        Share your thoughts, questions, or ideas with the
-                        community.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 py-4">
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="title"
-                          className={
-                            theme === "dark" ? "text-gray-200" : "text-gray-700"
-                          }
-                        >
-                          Title
-                        </Label>
-                        <Input
-                          id="title"
-                          placeholder="Enter a descriptive title"
-                          value={newThreadData.title}
-                          onChange={(e) =>
-                            setNewThreadData({
-                              ...newThreadData,
-                              title: e.target.value,
-                            })
-                          }
-                          className={
-                            theme === "dark"
-                              ? "bg-[#2D3748] border-[#4A5568]"
-                              : "bg-white border-gray-200"
-                          }
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="category"
-                          className={
-                            theme === "dark" ? "text-gray-200" : "text-gray-700"
-                          }
-                        >
-                          Category
-                        </Label>
-                        <Select
-                          value={newThreadData.category}
-                          onValueChange={(value) =>
-                            setNewThreadData({
-                              ...newThreadData,
-                              category: value,
-                            })
-                          }
-                        >
-                          <SelectTrigger
-                            className={
-                              theme === "dark"
-                                ? "bg-[#2D3748] border-[#4A5568]"
-                                : "bg-white border-gray-200"
-                            }
-                          >
-                            <SelectValue placeholder="Select a category" />
-                          </SelectTrigger>
-                          <SelectContent
-                            className={
-                              theme === "dark"
-                                ? "bg-[#2D3748] border-[#4A5568]"
-                                : "bg-white border-gray-200"
-                            }
-                          >
-                            {categories.map((category) => (
-                              <SelectItem
-                                key={category.id}
-                                value={category.slug}
-                              >
-                                {category.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label
-                          htmlFor="content"
-                          className={
-                            theme === "dark" ? "text-gray-200" : "text-gray-700"
-                          }
-                        >
-                          Content
-                        </Label>
-                        <Textarea
-                          id="content"
-                          placeholder="Write your thread content here..."
-                          rows={5}
-                          value={newThreadData.content}
-                          onChange={(e) =>
-                            setNewThreadData({
-                              ...newThreadData,
-                              content: e.target.value,
-                            })
-                          }
-                          className={
-                            theme === "dark"
-                              ? "bg-[#2D3748] border-[#4A5568]"
-                              : "bg-white border-gray-200"
-                          }
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button
-                        variant="outline"
-                        onClick={() => setShowAddThreadModal(false)}
-                        className={
-                          theme === "dark"
-                            ? "bg-[#2D3748] border-[#4A5568] hover:bg-[#3A4A63]"
-                            : "bg-white hover:bg-gray-50"
-                        }
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={handleAddThread}
-                        className={
-                          theme === "dark"
-                            ? "bg-blue-600 hover:bg-blue-700"
-                            : "bg-blue-500 hover:bg-blue-600"
-                        }
-                      >
-                        Post Thread
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-              </div>
             </div>
 
             {/* Threads */}
@@ -987,15 +819,14 @@ export default function Home() {
                       } Discussions`
                     : "All Discussions"}
                 </h2>
-                <Badge
-                  variant="outline"
+                <div
                   className={cn(
-                    "text-xs",
+                    "text-xs border border-white p-1 rounded-2xl px-1.5",
                     theme === "dark" ? "border-[#2D3748]" : "border-[#E2E8F0]"
                   )}
                 >
                   {filteredAndSortedThreads.length} threads
-                </Badge>
+                </div>
               </div>
 
               {isLoading ? (
@@ -1085,7 +916,7 @@ export default function Home() {
                       )}
                     >
                       <CardHeader className="pb-2">
-                        <div className="flex justify-between items-start">
+                        <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             <Avatar>
                               <AvatarImage
@@ -1103,30 +934,23 @@ export default function Home() {
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <div className="flex items-center gap-2">
+                              <div className="flex flex-row items-center justify-between gap-2">
                                 <span
                                   className={cn(
-                                    "font-medium",
-                                    thread.isAdmin && "text-blue-500"
+                                    "font-bold",
+                                    thread.isAdmin && "text-blue-500",
+                                    "whitespace-nowrap"
                                   )}
                                 >
                                   {thread.author}
                                 </span>
                                 <span
-                                  className={
+                                  className={cn(
                                     theme === "dark"
                                       ? "text-xs text-gray-400"
-                                      : "text-xs text-gray-500"
-                                  }
-                                >
-                                  •
-                                </span>
-                                <span
-                                  className={
-                                    theme === "dark"
-                                      ? "text-xs text-gray-400"
-                                      : "text-xs text-gray-500"
-                                  }
+                                      : "text-xs text-gray-500",
+                                    " whitespace-nowrap"
+                                  )}
                                 >
                                   {thread.timestamp}
                                 </span>
@@ -1134,7 +958,7 @@ export default function Home() {
                               <div
                                 className={`mt-1 ${getCategoryColor(
                                   thread.category
-                                )} text-white text-xs flex w-fit px-1 py-[1.2px] font-semibold rounded-xl justify-center items-center`}
+                                )} text-white text-xs flex w-fit px-1 py-[1.2px] font-thin rounded-xl justify-center items-center`}
                               >
                                 {
                                   categories.find(
@@ -1309,107 +1133,6 @@ export default function Home() {
           </main>
 
           {/* Saved Threads Panel */}
-          <aside
-            className={cn(
-              "fixed top-[73px] right-0 bottom-0 w-[25%] overflow-auto transition-all duration-300 border-l p-4",
-              theme === "dark"
-                ? "bg-[#1E293B] border-[#2D3748]"
-                : "bg-white border-[#E2E8F0]",
-              showSavedPanel ? "translate-x-0" : "translate-x-full"
-            )}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Bookmark className="h-5 w-5" /> Saved Threads
-              </h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={
-                  theme === "dark"
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-500 hover:text-gray-900"
-                }
-                onClick={() => setShowSavedPanel(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-
-            {savedThreads.length === 0 ? (
-              <div
-                className={cn(
-                  "text-center py-8",
-                  theme === "dark" ? "text-gray-400" : "text-gray-500"
-                )}
-              >
-                <Bookmark className="h-12 w-12 mx-auto mb-2 opacity-20" />
-                <p>No saved threads yet</p>
-                <p className="text-sm mt-1">
-                  Threads you save will appear here
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {savedThreadsList.map((thread) => (
-                  <div
-                    key={thread.id}
-                    className={cn(
-                      "p-3 rounded-md cursor-pointer",
-                      theme === "dark"
-                        ? "bg-[#2D3748] hover:bg-[#3A4A63]"
-                        : "bg-gray-50 hover:bg-gray-100"
-                    )}
-                    onClick={() => setOpenThreadId(thread.id)}
-                  >
-                    <div className="flex justify-between items-start">
-                      <h4 className="font-medium text-sm line-clamp-2">
-                        {thread.title}
-                      </h4>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className={cn(
-                          "h-6 w-6 ml-1 shrink-0",
-                          theme === "dark"
-                            ? "text-gray-400 hover:text-white"
-                            : "text-gray-500 hover:text-gray-900"
-                        )}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleSaveThread(thread.id);
-                        }}
-                      >
-                        <X className="h-3 w-3" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center gap-2 mt-2">
-                      <Badge
-                        variant="secondary"
-                        className={`${getCategoryColor(
-                          thread.category
-                        )} text-white text-xs`}
-                      >
-                        {
-                          categories.find((c) => c.slug === thread.category)
-                            ?.name
-                        }
-                      </Badge>
-                      <span
-                        className={
-                          theme === "dark"
-                            ? "text-xs text-gray-400"
-                            : "text-xs text-gray-500"
-                        }
-                      >
-                        {thread.upvotes} upvotes
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </aside>
         </div>
 
         <footer
@@ -1426,10 +1149,10 @@ export default function Home() {
             </p>
             <div className="gap-2 flex w-fit">
               <a href="https://linkedin.com/in/jjinendra3" target="_blank">
-                <Linkedin className="h-4 w-4 text-gray-500 hover:text-white cursor-pointer" />
+                <Linkedin className="h-5 w-5 text-gray-500 hover:text-white cursor-pointer" />
               </a>
               <a href="https://github.com/jjinendra3" target="_blank">
-                <GithubIcon className="h-4 w-4 text-gray-500 hover:text-white cursor-pointer" />
+                <GithubIcon className="h-5 w-5 text-gray-500 hover:text-white cursor-pointer" />
               </a>
             </div>
           </div>
@@ -1756,6 +1479,163 @@ export default function Home() {
             )}
           </SheetContent>
         </Sheet>
+        <Dialog open={showAddThreadModal} onOpenChange={setShowAddThreadModal}>
+          <DialogTrigger asChild>
+            <Button
+              size={"sm"}
+              className={cn(
+                "gap-1",
+                theme === "dark"
+                  ? "bg-blue-600 hover:bg-blue-700"
+                  : "bg-blue-500 hover:bg-blue-600",
+                "flex items-center justify-center font-semibold text-gray-300 sticky bottom-4 right-4 h-12 w-12 rounded-full"
+              )}
+            >
+              <Plus className="h-4 w-4 font-bold" />
+            </Button>
+          </DialogTrigger>
+
+          <DialogContent
+            className={
+              theme === "dark"
+                ? "bg-[#1E293B] border-[#2D3748]"
+                : "bg-white max-w-screen-md"
+            }
+          >
+            <DialogHeader>
+              <DialogTitle
+                className={theme === "dark" ? "text-white" : "text-gray-900"}
+              >
+                Create New Thread
+              </DialogTitle>
+              <DialogDescription
+                className={theme === "dark" ? "text-gray-400" : "text-gray-500"}
+              >
+                Share your thoughts, questions, or ideas with the community.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="title"
+                  className={
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }
+                >
+                  Title
+                </Label>
+                <Input
+                  id="title"
+                  placeholder="Enter a descriptive title"
+                  value={newThreadData.title}
+                  onChange={(e) =>
+                    setNewThreadData({
+                      ...newThreadData,
+                      title: e.target.value,
+                    })
+                  }
+                  className={
+                    theme === "dark"
+                      ? "bg-[#2D3748] border-[#4A5568]"
+                      : "bg-white border-gray-200"
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label
+                  htmlFor="category"
+                  className={
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }
+                >
+                  Category
+                </Label>
+                <Select
+                  value={newThreadData.category}
+                  onValueChange={(value) =>
+                    setNewThreadData({
+                      ...newThreadData,
+                      category: value,
+                    })
+                  }
+                >
+                  <SelectTrigger
+                    className={
+                      theme === "dark"
+                        ? "bg-[#2D3748] border-[#4A5568]"
+                        : "bg-white border-gray-200"
+                    }
+                  >
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent
+                    className={
+                      theme === "dark"
+                        ? "bg-[#2D3748] border-[#4A5568]"
+                        : "bg-white border-gray-200"
+                    }
+                  >
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.slug}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label
+                  htmlFor="content"
+                  className={
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }
+                >
+                  Content
+                </Label>
+                <Textarea
+                  id="content"
+                  placeholder="Write your thread content here..."
+                  rows={5}
+                  value={newThreadData.content}
+                  onChange={(e) =>
+                    setNewThreadData({
+                      ...newThreadData,
+                      content: e.target.value,
+                    })
+                  }
+                  className={
+                    theme === "dark"
+                      ? "bg-[#2D3748] border-[#4A5568]"
+                      : "bg-white border-gray-200"
+                  }
+                />
+              </div>
+            </div>
+            <DialogFooter className="flex flex-row items-center justify-between">
+              <Button
+                variant="outline"
+                onClick={() => setShowAddThreadModal(false)}
+                className={
+                  theme === "dark"
+                    ? "bg-[#2D3748] border-[#4A5568] hover:bg-[#3A4A63]"
+                    : "bg-white hover:bg-gray-50"
+                }
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleAddThread}
+                className={
+                  theme === "dark"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "bg-blue-500 hover:bg-blue-600"
+                }
+              >
+                Post Thread
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </ThemeProvider>
   );
